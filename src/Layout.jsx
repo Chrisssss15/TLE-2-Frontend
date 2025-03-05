@@ -5,7 +5,7 @@ function Layout() {
     return (
         <>
 
-            <header className="flex justify-between items-center py-4 px-6">
+            <header className="flex justify-between items-center py-4 px-6 border-b border-gray-600">
 
                 <div className="h-16">
                     <img src={logo} alt="Logo" className="h-full w-auto"/>
