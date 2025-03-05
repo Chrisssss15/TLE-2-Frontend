@@ -4,14 +4,14 @@ import logo from "/logo.png"; // Ensure the logo is in the `public` folder
 function Layout() {
     return (
         <>
-            {/* Navbar Container */}
+
             <header className="flex justify-between items-center py-4 px-6">
-                {/* Logo (Left) */}
+
                 <div className="h-16">
                     <img src={logo} alt="Logo" className="h-full w-auto"/>
                 </div>
 
-                {/* Navigation Links (Right) */}
+
                 <nav className="flex gap-5">
                     <Link to="/">Home</Link>
                     <Link to="alphabet">Alphabet</Link>
@@ -21,7 +21,7 @@ function Layout() {
 
             <Outlet/>
 
-            {/* Footer */}
+
             <footer className="flex justify-center py-4 gap-5 ">
                 <Link to="privacy" >Privacy</Link>
                 <Link to="contact" >Contact</Link>
