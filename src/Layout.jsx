@@ -12,11 +12,11 @@ function Layout() {
                 </div>
 
 
-                <nav className="flex gap-5">
-                    <Link to="/">Home</Link>
-                    <Link to="alphabet">Alphabet</Link>
-                    <Link to="profiel">Profiel</Link>
-                </nav>
+                {/*<nav className="flex gap-5">*/}
+                {/*    <Link to="/">Home</Link>*/}
+                {/*    <Link to="alphabet">Alphabet</Link>*/}
+                {/*    <Link to="profiel">Profiel</Link>*/}
+                {/*</nav>*/}
             </header>
 
             <Outlet/>
