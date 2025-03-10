@@ -5,6 +5,8 @@ import Alphabet from "./Alphabet.jsx";
 import Profiel from "./Profiel.jsx";
 import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
+import Grammar from "./Grammar.jsx";
+import Flashcards from "./Flashcards.jsx";
 
 const router = createBrowserRouter([{
     element:<Layout/>,
@@ -29,6 +31,15 @@ const router = createBrowserRouter([{
             path:"/contact",
             element: <Contact/>
         },
+        {
+            path:"/grammar",
+            element: <Grammar/>
+        },
+        {
+            path:"/flashcards",
+            element: <Flashcards/>
+        },
+
 
 
     ]
