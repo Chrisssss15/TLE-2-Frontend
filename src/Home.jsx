@@ -35,7 +35,7 @@ function Homepage() {
                 </Link>
 
 
-                <Link to="/spelling">
+                <Link to="/flashcards">
                     <div
                         className="bg-[#C9DBE1] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
                         <h2 className="text-4xl font-semibold mb-2 text-center">Flashcards</h2>
@@ -52,7 +52,7 @@ function Homepage() {
 
 
             <div className="flex flex-col md:flex-row gap-6 mb-6">
-                <Link to="/spelling">
+                <Link to="/grammatica">
                     <div
                         className="bg-[#FFC086] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
                         <h2 className="text-4xl font-semibold mb-2 text-center">Grammatica</h2>
@@ -66,7 +66,7 @@ function Homepage() {
                     </div>
                 </Link>
 
-                <Link to="/spelling">
+                <Link to="/dictionary">
                     <div
                         className="bg-[#9FE3A4] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
                         <h2 className="text-4xl font-semibold mb-2 text-center">Woordenboek</h2>
@@ -81,7 +81,7 @@ function Homepage() {
                 </Link>
             </div>
 
-            <Link to="/spelling">
+            <Link to="/practice">
                 <div
                     className="bg-[#E2C0E8] border-2 border-black shadow-xl rounded-3xl p-6 mb-6 hover:-translate-y-1 transition-transform flex flex-row items-center gap-4">
 
@@ -98,7 +98,7 @@ function Homepage() {
             </Link>
 
 
-            <Link to="/spelling">
+            <Link to="/difficult-words">
                 <div
                     className="bg-[#FFF399] border-2 border-black shadow-xl rounded-3xl p-6 flex-1 hover:-translate-y-1 transition-transform flex flex-row items-center gap-4">
                     <img

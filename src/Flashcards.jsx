@@ -1,82 +1,36 @@
 
-const words = [
-    {
-        question: "Naam",
-        answer: "image here"
-    },
-    {
-        question: "Leeftijd",
-        answer: "image here"
-    },
-    {
-        question: "Werk",
-        answer: "image here"
-    },
-    {
-        question: "Hobby",
-        answer: "image here"
-    },
-    {
-        question: "Gezin",
-        answer: "image here"
-    },
-    {
-        question: "Woonplaats",
-        answer: "image here"
-    },
-    {
-        question: "Taal",
-        answer: "image here"
-    },
-    {
-        question: "Gezondheid",
-        answer: "image here"
-    }
-];
 
-let currentQuestionIndex = -1;
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded and parsed");
-    currentQuestionIndex = -1;
-    let startButton = document.getElementById("startButton");
-    startButton.addEventListener("click", () =>setupQuestion(startButton));
+function Flashcards() {
+    return (
+        <div className="container mx-auto p-6">
+            <div className="mb-6">
+                <h2 className="text-9xl font-semibold mb-2 text-left">Les</h2>
+                <h4 className="text-2xl w-52 font-semibold border border-black rounded-2xl p-2 inline-block">Kies Je
+                    les:</h4>
+            </div>
 
-});
-
-function setupQuestion(startButton){
-
-    // skrt || indicator for what question you are, later for what question inside quiz
-    currentQuestionIndex++;
-
-    console.log("set up questions function reached");
-    startButton.remove();
-
-    let question = document.createElement("h2");
-    question.innerHTML = questions[currentQuestionIndex].question;
-    console.log('question', question, words[currentQuestionIndex]);
-    question.className = "text-3xl font-bold text-gray-800 text-center mt-4 mb-19";
-    document.getElementById("canvas").appendChild(question);
-
-
-}
-
-function Flashcards(){
-
-    return(
-        <>
-
-
-            <p>Hier komt de contact informatie</p>
-
-            <div id="canvas" className="flex flex-col items-center justify-center h-screen">
-                <button id="startButton" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded-lg shadow-lg transition duration-300 ease-in-out">
-                    Start Flashcards Oefening
-                </button>
+            <div className="flex justify-left gap-8">
+                <div className="w-52 h-52 bg-[#D3EEF8] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#578292] shadow-lg
+        transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
+                    1
+                </div>
+                <div className="w-52 h-52 bg-[#BEDCE7] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#578292] shadow-lg
+        transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
+                    2
+                </div>
+                <div className="w-52 h-52 bg-[#AACAD5] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#578292] shadow-lg
+        transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
+                    3
+                </div>
+                <div className="w-52 h-52 bg-[#95B8C4] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#578292] shadow-lg
+        transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
+                    4
+                </div>
             </div>
 
 
-
-        </>
-    )
+        </div>
+    );
 }
-export default Flashcards
+
+export default Flashcards;

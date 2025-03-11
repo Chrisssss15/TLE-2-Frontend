@@ -1,6 +1,6 @@
 
 
-function Spelling() {
+function Grammatica() {
     return (
         <div className="container mx-auto p-6">
             <div className="mb-6">
@@ -10,19 +10,19 @@ function Spelling() {
             </div>
 
             <div className="flex justify-left gap-8">
-                <div className="w-52 h-52 bg-[#FCFF62] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#B99F0D] shadow-lg
+                <div className="w-52 h-52 bg-[#FFB733] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#922A0A] shadow-lg
         transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
                     1
                 </div>
-                <div className="w-52 h-52 bg-[#FCF554] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#B99F0D] shadow-lg
+                <div className="w-52 h-52 bg-[#FFA626] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#922A0A] shadow-lg
         transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
                     2
                 </div>
-                <div className="w-52 h-52 bg-[#FCF446] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#B99F0D] shadow-lg
+                <div className="w-52 h-52 bg-[#FFAA17] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#922A0A] shadow-lg
         transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
                     3
                 </div>
-                <div className="w-52 h-52 bg-[#FCF238] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#B99F0D] shadow-lg
+                <div className="w-52 h-52 bg-[#FF8F26] flex items-center justify-center text-9xl font-bold rounded-3xl text-[#922A0A] shadow-lg
         transition-transform duration-1000 ease-in-out hover:-translate-y-2 hover:shadow-2xl">
                     4
                 </div>
@@ -33,4 +33,4 @@ function Spelling() {
     );
 }
 
-export default Spelling;
+export default Grammatica;
