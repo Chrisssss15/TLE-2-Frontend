@@ -53,7 +53,7 @@ function Homepage() {
 
                     <div
                         className="bg-orangeHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
-                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">SPELLING</h2>
+                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">GRAMMATICA</h2>
                         <img
                             src={grammatica}
                             alt="Grammatica"
@@ -66,7 +66,7 @@ function Homepage() {
                 <Link to="/dictionary">
                     <div
                         className="bg-greenHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
-                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">FLASHCARDS</h2>
+                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">WOORDENBOEK</h2>
 
                         <img
                             src={woordenboek}
