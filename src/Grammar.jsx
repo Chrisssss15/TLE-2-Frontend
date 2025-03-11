@@ -25,92 +25,74 @@ const questions = [
 
 
 
-
-let currentQuestionIndex = -1;
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded and parsed || THIS IS GRAMMAR.jsx CODE");
-    currentQuestionIndex = -1;
-    let startButton = document.getElementById("startButton");
-    startButton.addEventListener("click", () =>setupQuestion(startButton));
-
-});
-
-function setupQuestion(startButton){
-
-    // skrt || indicator for what question you are, later for what question inside quiz
-    currentQuestionIndex++;
-
-    console.log("set up questions function reached");
-    startButton.remove();
-
-    let question = document.createElement("h2");
-    question.innerHTML = questions[currentQuestionIndex].question;
-    question.className = "text-3xl font-bold text-gray-800 text-center mt-4 mb-20";
-    document.getElementById("canvas").appendChild(question);
-
-
-    let answerInput = document.createElement("input");
-    answerInput.type = "text";
-    answerInput.className = "border-2 border-gray-300 p-2 rounded-lg w-1/2";
-    document.getElementById("canvas").appendChild(answerInput);
-
-    let submitButton = document.createElement("button");
-    submitButton.innerHTML = "Controleer antwoord";
-    document.getElementById("canvas").appendChild(submitButton);
-    submitButton.addEventListener("click", () =>checkAnswer(answerInput));
-}
-
-function checkAnswer(answerInput) {
-    let answer = answerInput.value;
-    let spacelessAnswer = answer.split(" ").join("");
-    let correctAnswer = questions[currentQuestionIndex].answer;
-
-    if (spacelessAnswer === correctAnswer || spacelessAnswer.toUpperCase() === correctAnswer) {
-        alert("Correct!");
-        nextQuestion();
-    } else {
-        alert("Incorrect!");
-    }
-}
-
-function nextQuestion() {
-    let input = document.querySelector("input");
-   input.value = ' ';
-    console.log('next question function reached');
-    currentQuestionIndex++;
-
-    let question = document.querySelector('h2');
-    question.innerHTML = questions[currentQuestionIndex].question;
-
-
-}
-
-
-
-
-
-
-
-
-
 function Grammar(){
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [userAnswer, setUserAnswer] = useState("");
+    const [started, setStarted] = useState(false);
+
+
+
+    function startGrammar(){
+        setStarted(true);
+        console.log(currentQuestionIndex);
+        console.log([questions[currentQuestionIndex].question]);
+
+
+    }
+
+    function checkAnswer(){
+
+
+        let correctAnswer = questions[currentQuestionIndex].answer;
+        console.log(correctAnswer);
+        console.log(userAnswer);
+        //str = str.replace(/\s+/g, '');
+        let spacelessAnswer = userAnswer.replace(/\s+/g, '');
+        console.log(userAnswer);
+
+        if (correctAnswer === userAnswer || correctAnswer === spacelessAnswer){
+            console.log("Correct");
+
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        };
+        setUserAnswer("");
+    }
     return(
         <>
 
 
             <p>Hier komt de contact informatie</p>
-
+            {started === false ? (
             <div id="canvas" className="flex flex-col items-center justify-center h-screen">
-                <button id="startButton" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded-lg shadow-lg transition duration-300 ease-in-out">
+                <button
+                    onClick={startGrammar}
+                    id="startButton" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded-lg shadow-lg transition duration-300 ease-in-out">
                     Start Quiz
                 </button>
             </div>
+            ) : (
+                <div className="flex flex-col items-center justify-center h-screen w-full text-center">
 
+                    <h2 className="font-bold text-3xl mb-16">{[questions[currentQuestionIndex].question]}</h2>
+                    <input
+                        value={userAnswer}
+                        onChange={
+                        (e) => setUserAnswer(e.target.value)
+                    }
+                        type="text"
+
+                        className="border-2 border-gray-300 p-2 rounded-lg w-1/2" />
+                    <button
+                        onClick={checkAnswer}
+                        className="bg-blue-700 text-white">Controleer antwoord</button>
+
+                </div>
+            )}
 
 
         </>
     )
 }
-export default Grammar
+export default Grammar;
 
 
