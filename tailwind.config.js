@@ -76,7 +76,8 @@ export default {
         red1: '#FF7B7B',
         red2: '#FF5959',
         red3: '#FF3333',
-        redAgain: '#E8CCCC'
+        redAgain: '#E8CCCC',
+        redLink: '#5D0000',
       },
     },
   },
