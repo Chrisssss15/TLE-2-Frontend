@@ -45,23 +45,23 @@ function Flashcards_quiz(){
 
     }
 
-    function checkAnswer(){
-
-
-        let correctAnswer = questions[currentQuestionIndex].answer;
-        console.log(correctAnswer);
-        console.log(userAnswer);
-        //str = str.replace(/\s+/g, '');
-        let spacelessAnswer = userAnswer.replace(/\s+/g, '');
-        console.log(userAnswer);
-
-        if (correctAnswer === userAnswer || correctAnswer === spacelessAnswer){
-            console.log("Correct");
-
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        };
-        setUserAnswer("");
-    }
+    // function checkAnswer(){
+    //
+    //
+    //     let correctAnswer = questions[currentQuestionIndex].answer;
+    //     console.log(correctAnswer);
+    //     console.log(userAnswer);
+    //     //str = str.replace(/\s+/g, '');
+    //     let spacelessAnswer = userAnswer.replace(/\s+/g, '');
+    //     console.log(userAnswer);
+    //
+    //     if (correctAnswer === userAnswer || correctAnswer === spacelessAnswer){
+    //         console.log("Correct");
+    //
+    //         setCurrentQuestionIndex(currentQuestionIndex + 1);
+    //     };
+    //     setUserAnswer("");
+    // }
 
     function nextCard(){
         setCurrentQuestionIndex(currentQuestionIndex + 1);
