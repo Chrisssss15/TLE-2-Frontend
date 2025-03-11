@@ -7,8 +7,17 @@ import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
 import Grammar from "./Grammar.jsx";
 import Flashcards from "./Flashcards.jsx";
+import Spelling from "./Spelling.jsx";
+import Grammatica from "./Grammatica.jsx";
+import Dictionary from "./Dictionary.jsx";
+
 import './style.css'
 import './fonts.css'
+import Practice from "./Practice.jsx";
+import Difficult from "./Difficult-words.jsx";
+
+
+
 const router = createBrowserRouter([{
     element:<Layout/>,
     children:[
@@ -36,9 +45,35 @@ const router = createBrowserRouter([{
             path:"/grammar",
             element: <Grammar/>
         },
+
+        {
+            path:"/spelling",
+            element: <Spelling/>
+        },
+
         {
             path:"/flashcards",
             element: <Flashcards/>
+        },
+
+        {
+            path:"/grammatica",
+            element: <Grammatica/>
+        },
+
+        {
+            path:"/dictionary",
+            element: <Dictionary/>
+        },
+
+        {
+            path:"/practice",
+            element: <Practice/>
+        },
+
+        {
+            path:"/difficult-words",
+            element: <Difficult/>
         },
 
 
