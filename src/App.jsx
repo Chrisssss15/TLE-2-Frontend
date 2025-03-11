@@ -15,6 +15,7 @@ import './style.css'
 import './fonts.css'
 import Practice from "./Practice.jsx";
 import Difficult from "./Difficult-words.jsx";
+import Words from "./Words.jsx";
 
 
 
@@ -76,6 +77,10 @@ const router = createBrowserRouter([{
             element: <Difficult/>
         },
 
+        {
+            path:"/words",
+            element: <Words/>
+        },
 
 
     ]
