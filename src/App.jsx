@@ -1,7 +1,7 @@
 import {createBrowserRouter, RouterProvider} from "react-router";
 import Layout from "./Layout.jsx";
 import Home from "./Home.jsx";
-import Alphabet from "./Alphabet.jsx";
+import Alfabet from "./Alfabet.jsx";
 import Profiel from "./Profiel.jsx";
 import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
@@ -15,6 +15,7 @@ import './style.css'
 import './fonts.css'
 import Practice from "./Practice.jsx";
 import Difficult from "./Difficult-words.jsx";
+import Words from "./Words.jsx";
 
 
 
@@ -26,8 +27,8 @@ const router = createBrowserRouter([{
             element: <Home/>
         },
         {
-            path:"/alphabet",
-            element: <Alphabet/>
+            path:"/alfabet",
+            element: <Alfabet/>
         },
         {
             path:"/profiel",
@@ -76,6 +77,10 @@ const router = createBrowserRouter([{
             element: <Difficult/>
         },
 
+        {
+            path:"/words",
+            element: <Words/>
+        },
 
 
     ]

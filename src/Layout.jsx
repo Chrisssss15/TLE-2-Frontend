@@ -14,7 +14,7 @@ function Layout() {
 
                 {/*<nav className="flex gap-5">*/}
                 {/*    <Link to="/">Home</Link>*/}
-                {/*    <Link to="alphabet">Alphabet</Link>*/}
+                {/*    <Link to="alfabet">Alfabet</Link>*/}
                 {/*    <Link to="profiel">Profiel</Link>*/}
                 {/*</nav>*/}
             </header>
