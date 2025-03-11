@@ -9,6 +9,8 @@ import Grammar from "./Grammar.jsx";
 import Flashcards from "./Flashcards.jsx";
 import Spelling from "./Spelling.jsx";
 
+import './style.css'
+import './fonts.css'
 const router = createBrowserRouter([{
     element:<Layout/>,
     children:[

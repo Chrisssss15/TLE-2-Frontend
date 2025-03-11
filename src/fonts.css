@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Strawford';
+    src: url('./assets/fonts/Strawford-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Strawforditalic';
+    src: url('./assets/fonts/Strawford-RegularItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Slickybohem';
+    src: url('./assets/fonts/SLICKYBOHEM-Regular.otf') format('opentype');
+}
