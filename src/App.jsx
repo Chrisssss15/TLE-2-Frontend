@@ -6,7 +6,7 @@ import Profiel from "./Profiel.jsx";
 import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
 import Grammar from "./Grammar.jsx";
-import Flashcards from "./Flashcards.jsx";
+import Flashcards_quiz from "./Flashcards_quiz.jsx";
 import Spelling from "./Spelling.jsx";
 import Grammatica from "./Grammatica.jsx";
 import Dictionary from "./Dictionary.jsx";
@@ -53,7 +53,7 @@ const router = createBrowserRouter([{
 
         {
             path:"/flashcards",
-            element: <Flashcards/>
+            element: <Flashcards_quiz/>
         },
 
         {

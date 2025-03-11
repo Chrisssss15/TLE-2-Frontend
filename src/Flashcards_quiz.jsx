@@ -27,7 +27,7 @@ const questions = [
 
 
 
-function Flashcards(){
+function Flashcards_quiz(){
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswer, setUserAnswer] = useState("");
     const [started, setStarted] = useState(false);
@@ -62,6 +62,11 @@ function Flashcards(){
         };
         setUserAnswer("");
     }
+
+    function nextCard(){
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setFlipped(false);
+    }
     return(
         <>
 
@@ -83,7 +88,7 @@ function Flashcards(){
                 <div className="flex items-center justify-center h-screen w-full text-center">
 
 
-                    <button onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)} className="w-12 h-12 bg-red-600">Fout</button>
+                    <button onClick={nextCard} className="w-12 h-12 bg-red-600">Fout</button>
                     <div className="flex flex-col items-center justify-center h-screen w-80 text-center">
                     {flipped === false ? (
 
@@ -97,7 +102,7 @@ function Flashcards(){
                         className="bg-blue-700 text-white"
                     >Draai Kaartje</button>
                     </div>
-                    <button className="w-12 h-12 bg-green-500">Goed</button>
+                    <button onClick={nextCard} className="w-12 h-12 bg-green-500">Goed</button>
                 </div>
 
 
@@ -109,6 +114,6 @@ function Flashcards(){
         </>
     )
 }
-export default Flashcards;
+export default Flashcards_quiz;
 
 
