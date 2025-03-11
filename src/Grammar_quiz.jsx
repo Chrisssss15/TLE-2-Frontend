@@ -25,7 +25,7 @@ const questions = [
 
 
 
-function Grammar(){
+function Grammar_quiz(){
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswer, setUserAnswer] = useState("");
     const [started, setStarted] = useState(false);
@@ -93,6 +93,6 @@ function Grammar(){
         </>
     )
 }
-export default Grammar;
+export default Grammar_quiz;
 
 

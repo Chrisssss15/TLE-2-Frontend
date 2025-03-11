@@ -5,7 +5,7 @@ import Alfabet from "./Alfabet.jsx";
 import Profiel from "./Profiel.jsx";
 import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
-import Grammar from "./Grammar.jsx";
+import Grammar_quiz from "./Grammar_quiz.jsx";
 import Flashcards_quiz from "./Flashcards_quiz.jsx";
 import Spelling from "./Spelling.jsx";
 import Grammatica from "./Grammatica.jsx";
@@ -44,7 +44,7 @@ const router = createBrowserRouter([{
         },
         {
             path:"/grammar",
-            element: <Grammar/>
+            element: <Grammar_quiz/>
         },
 
         {
