@@ -15,7 +15,7 @@ function Woordenboek() {
                 const response = await fetch('http://145.24.223.196:8008/signs', {
                     method: 'GET',
                     headers: {
-                        'Authorization': 'Bearer 95937790-3a9d-4ee2-9ed6-ace5165167f2',  // Voeg hier je API-sleutel toe
+                        'Authorization': '',  // Voeg hier je API-sleutel toe
                         'Content-Type': 'application/json',
                     },
                 });
