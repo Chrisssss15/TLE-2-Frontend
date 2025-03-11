@@ -7,7 +7,8 @@ import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
 import Grammar from "./Grammar.jsx";
 import Flashcards from "./Flashcards.jsx";
-
+import './style.css'
+import './fonts.css'
 const router = createBrowserRouter([{
     element:<Layout/>,
     children:[
