@@ -10,25 +10,23 @@ import {Link} from "react-router-dom";
 function Homepage() {
     return (
 
-        <div className="m-1">
+        <div className="m-0 w-[100vw] flex flex-col ">
             <img
                 src={gebaren}
                 alt="gebaren"
-                className="h-45 border-b-2 border-black mb-6"
+                className="h-auto border-b-[1px] border-black mb-[20vh] px-[2%]"
             />
 
-            <div className="flex flex-col md:flex-row gap-6 mb-6">
+            <div className="flex flex-col justify-center gap-[5vw] px-[10vw] b-[10vh] mb-[10vh] md:flex-row">
                 <Link to="/spelling">
 
                     <div
-                        className="bg-[#FFF399] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
-
-
-                        <h2 className="text-4xl font-semibold mb-2 text-center">Spelling</h2>
+                        className="bg-yellowHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
+                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">SPELLING</h2>
                         <img
                             src={spelling}
                             alt="Spelling"
-                            className="h-45 mx-auto"
+                            className="h-1/2 w-auto mx-auto m-[-0.2vh]"
                         />
 
                     </div>
@@ -37,62 +35,62 @@ function Homepage() {
 
                 <Link to="/spelling">
                     <div
-                        className="bg-[#C9DBE1] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
-                        <h2 className="text-4xl font-semibold mb-2 text-center">Flashcards</h2>
+                        className="bg-blueHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
+                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">FLASHCARDS</h2>
 
                         <img
                             src={flashcards}
                             alt="flashcards"
-                            className="h-45 mx-auto"
+                            className="h-1/2 w-auto mx-auto m-[-0.2vh]"
                         />
 
                     </div>
                 </Link>
             </div>
 
-
-            <div className="flex flex-col md:flex-row gap-6 mb-6">
+            <div className="flex flex-col justify-center gap-[5vw] px-[10vw] b-[10vh] mb-[10vh] md:flex-row">
                 <Link to="/spelling">
-                    <div
-                        className="bg-[#FFC086] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
-                        <h2 className="text-4xl font-semibold mb-2 text-center">Grammatica</h2>
 
+                    <div
+                        className="bg-orangeHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
+                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">SPELLING</h2>
                         <img
                             src={grammatica}
-                            alt="grammatica"
-                            className="h-45 mx-auto"
+                            alt="Grammatica"
+                            className="h-1/2 w-auto mx-auto m-[-0.2vh]"
                         />
 
                     </div>
                 </Link>
 
+
                 <Link to="/spelling">
                     <div
-                        className="bg-[#9FE3A4] border-2 border-black shadow-xl rounded-3xl flex-1 hover:-translate-y-1 transition-transform">
-                        <h2 className="text-4xl font-semibold mb-2 text-center">Woordenboek</h2>
+                        className="bg-greenHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
+                        <h2 className="text-[4vw] font-Strawford mt-16 p-3 mb-14 text-center text-black">FLASHCARDS</h2>
 
                         <img
                             src={woordenboek}
-                            alt="woordenboek"
-                            className="h-45 mx-auto"
+                            alt="Woordenboek"
+                            className="h-1/2 w-auto mx-auto m-[-0.2vh]"
                         />
-
                     </div>
                 </Link>
             </div>
 
             <Link to="/spelling">
                 <div
-                    className="bg-[#E2C0E8] border-2 border-black shadow-xl rounded-3xl p-6 mb-6 hover:-translate-y-1 transition-transform flex flex-row items-center gap-4">
+                    className="bg-purpleHome border-4 border-black rounded-[7.8rem] shadow-xl mb-[10vh] mx-[11.5vw] hover:-translate-y-1 transition-transform flex flex-row items-center gap-4">
 
                     <img
                         src={oefentoets}
                         alt="oefentoets"
-                        className="h-50 w-auto rounded-lg"
+                        className="w-1/2 h-auto m-[-0.2vh] mt-[-1vh]"
                     />
 
                     <div className="flex-1">
-                        <h2 className="text-4xl font-semibold mb-2 text-center">Oefen Intake Toets</h2>
+                        <h2 className="text-[4vw] font-Strawford p-3 text-center text-black">OEFEN INTAKE
+                            TOETS</h2>
                     </div>
                 </div>
             </Link>
@@ -100,15 +98,15 @@ function Homepage() {
 
             <Link to="/spelling">
                 <div
-                    className="bg-[#FFF399] border-2 border-black shadow-xl rounded-3xl p-6 flex-1 hover:-translate-y-1 transition-transform flex flex-row items-center gap-4">
+                    className="bg-redHome border-4 border-black rounded-[7.8rem] shadow-xl mb-[10vh] mx-[11.5vw] hover:-translate-y-1 transition-transform flex flex-row items-center gap-4">
                     <img
                         src={moeilijke}
                         alt="moeilijke woorden"
-                        className="h-50 w-auto rounded-lg"
+                        className="w-1/2 h-auto m-[-0.2vh] mt-[-1vh]"
                     />
 
                     <div className="flex-1">
-                        <h2 className="text-4xl font-semibold mb-2 text-center">Moeilijke woorden</h2>
+                        <h2 className="text-[4vw] font-Strawford p-3 text-center text-black">MOEILIJKE WOORDEN</h2>
                     </div>
                 </div>
             </Link>
