@@ -7,6 +7,7 @@ import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
 import Grammar from "./Grammar.jsx";
 import Flashcards from "./Flashcards.jsx";
+import Spelling from "./Spelling.jsx";
 
 const router = createBrowserRouter([{
     element:<Layout/>,
@@ -38,6 +39,11 @@ const router = createBrowserRouter([{
         {
             path:"/flashcards",
             element: <Flashcards/>
+        },
+
+        {
+            path:"/spelling",
+            element: <Spelling/>
         },
 
 
