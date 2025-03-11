@@ -20,7 +20,7 @@ function Alfabet(){
                 console.log(data);
                 setSigns(data.items);
             } catch (error) {
-                console.error('Error fetching notes:', error);
+                console.error('Error fetching signs:', error);
             }
         }
 
