@@ -65,7 +65,7 @@ const signs = [
         video_path: "/videos/A.mp4",
         facial_expressions: {
             name: "Neutrale uitdrukking",
-            image_path: "/images/neutral.png"
+            image_path: "/public/spelling-avatar.png"
         }
     },
     {
@@ -151,24 +151,28 @@ function Alfabet(){
     const alphabetSigns = signs.filter(sign => sign.theme === "Alfabet");
 
     return (
-        <div>
-            <h2>Alfabet Gebaren</h2>
-            <ul>
+        <div className="p-6">
+            {/* Centered Title */}
+            <h1 className="text-3xl font-bold text-center mb-6">Alfabet Gebaren</h1>
+
+            {/* Grid Layout: 1 column on small screens, 2 on medium, 3 on large */}
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {alphabetSigns.map(sign => (
-                    <li key={sign.id}>
-                        <h3>{sign.definition}</h3>
-                        <p>Les: {sign.lesson}</p>
-                        <p>Gezichtsuitdrukking: {sign.facial_expressions.name}</p>
-                        <img src={sign.facial_expressions.image_path} alt={sign.facial_expressions.name} width="100"/>
-                        <br/>
-                        <video width="200" controls>
-                            <source src={sign.video_path} type="video/mp4"/>
-                            Je browser ondersteunt geen video-element.
-                        </video>
+                    <li key={sign.id} className="bg-white p-4 rounded-lg shadow-lg text-center">
+                        <h3 className="text-lg font-semibold mb-2">{sign.definition}</h3>
+                        {sign.video_path.match(/\.(mp4|webm|ogg)$/i) ? (
+                            <video width="200" controls className="mx-auto">
+                                <source src={sign.video_path} type="video/mp4"/>
+                                Je browser ondersteunt geen video-element.
+                            </video>
+                        ) : (
+                            <img src={sign.video_path} alt={sign.definition} width="200" className="mx-auto"/>
+                        )}
                     </li>
                 ))}
             </ul>
-        </div>)
+        </div>
+    );
 }
 
 export default Alfabet
