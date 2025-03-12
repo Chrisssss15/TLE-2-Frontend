@@ -17,6 +17,7 @@ import Practice from "./Practice.jsx";
 import Difficult from "./Difficult-words.jsx";
 import Words from "./Words.jsx";
 import Flashcards from "./Flashcards.jsx";
+import SpellingQuiz from "./Spelling_quiz.jsx";
 
 
 
@@ -89,6 +90,10 @@ const router = createBrowserRouter([{
             element: <Words/>
         },
 
+        {
+            path:"/spelling-quiz",
+            element: <SpellingQuiz/>
+        },
 
     ]
 
