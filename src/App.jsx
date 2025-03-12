@@ -5,7 +5,7 @@ import Alfabet from "./Alfabet.jsx";
 import Profiel from "./Profiel.jsx";
 import Privacy from "./Privacy.jsx";
 import Contact from "./Contact.jsx";
-import Grammar from "./Grammar.jsx";
+import Grammar_quiz from "./Grammar_quiz.jsx";
 import Flashcards_quiz from "./Flashcards_quiz.jsx";
 import Spelling from "./Spelling.jsx";
 import Grammatica from "./Grammatica.jsx";
@@ -16,6 +16,7 @@ import './fonts.css'
 import Practice from "./Practice.jsx";
 import Difficult from "./Difficult-words.jsx";
 import Words from "./Words.jsx";
+import Flashcards from "./Flashcards.jsx";
 
 
 
@@ -42,9 +43,10 @@ const router = createBrowserRouter([{
             path:"/contact",
             element: <Contact/>
         },
+
         {
-            path:"/grammar",
-            element: <Grammar/>
+            path:"/grammar-quiz",
+            element: <Grammar_quiz/>
         },
 
         {
@@ -54,11 +56,16 @@ const router = createBrowserRouter([{
 
         {
             path:"/flashcards",
+            element: <Flashcards/>
+        },
+
+        {
+            path:"/flashcards-quiz",
             element: <Flashcards_quiz/>
         },
 
         {
-            path:"/grammatica",
+            path:"/grammar",
             element: <Grammatica/>
         },
 
