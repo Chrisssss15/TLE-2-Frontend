@@ -70,45 +70,48 @@ function Flashcards_quiz(){
     return(
         <>
 
+            <div className="flex items-center justify-center h-screen w-full bg-gray-100">
+                {/* Fout-knop (links) */}
+                <button onClick={nextCard} className="w-14 h-14 bg-red-600 text-white font-bold rounded-full shadow-md hover:bg-red-700 transition">
+                    ✗
+                </button>
 
-            <p>Hier komt de contact informatie</p>
-            {started === false ? (
-                <div id="canvas" className="flex flex-col items-center justify-center h-screen">
-                    <button
-                        onClick={startGrammar}
-                        id="startButton" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-8 px-16 rounded-lg shadow-lg transition duration-300 ease-in-out">
-                        Start Quiz
-                    </button>
-                </div>
-            ) : (
+                {/* Flashcard-container met flip effect */}
+                <div className="relative w-80 h-52 mx-6 perspective">
+                    <div
+                        className={`w-full h-full relative transition-transform duration-500 transform-style preserve-3d ${
+                            flipped ? 'rotate-y-180' : ''
+                        }`}
+                    >
+                        {/* Voorkant - toont de vraag */}
+                        <div className="absolute w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center text-center text-xl font-semibold backface-hidden">
+                            {questions[currentQuestionIndex].question}
+                        </div>
 
+                        {/* Achterkant - toont de video */}
+                        <div className="absolute w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center backface-hidden rotate-y-180">
+                            <video controls className="w-full h-full rounded-lg">
+                                <source src={questions[currentQuestionIndex].video} type="video/mp4" />
+                                Je browser ondersteunt deze video niet.
+                            </video>
+                        </div>
+                    </div>
 
-
-
-                <div className="flex items-center justify-center h-screen w-full text-center">
-
-
-                    <button onClick={nextCard} className="w-12 h-12 bg-red-600">Fout</button>
-                    <div className="flex flex-col items-center justify-center h-screen w-80 text-center">
-                    {flipped === false ? (
-
-
-                    <h2 className="font-bold text-3xl mb-16">{[questions[currentQuestionIndex].question]}</h2>
-                ) : (
-                    <h2 className="font-bold text-3xl mb-16">{[questions[currentQuestionIndex].answer]}</h2>
-                    )}
+                    {/* "Draai Kaartje"-knop */}
                     <button
                         onClick={() => setFlipped(!flipped)}
-                        className="bg-blue-700 text-white"
-                    >Draai Kaartje</button>
-                    </div>
-                    <button onClick={nextCard} className="w-12 h-12 bg-green-500">Goed</button>
+                        className="mt-4 bg-blue3 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue8 transition w-full"
+                    >
+                        Bekijk Antwoord
+                    </button>
                 </div>
 
-
-
-
-            )}
+                {/* Goed-knop (rechts) */}
+                <button onClick={nextCard} className="w-14 h-14 bg-green-500 text-white font-bold rounded-full shadow-md hover:bg-green-600 transition">
+                    ✓
+                </button>
+            </div>
+            )
 
 
         </>
