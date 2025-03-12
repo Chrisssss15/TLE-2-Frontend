@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/*animatie voor foute of goede antwoorden*/
+/*Flashcards*/
+.perspective {
+    perspective: 1000px;
+}
+.transform-style {
+    transform-style: preserve-3d;
+}
+.backface-hidden {
+    backface-visibility: hidden;
+}
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
+/*Grammatica*/
+/*animatie voor foute of goede antwoorden */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }
