@@ -17,6 +17,7 @@ import Practice from "./Practice.jsx";
 import Difficult from "./Difficult-words.jsx";
 import Words from "./Words.jsx";
 import Flashcards from "./Flashcards.jsx";
+import Admin from "./Admin.jsx";
 
 
 
@@ -87,6 +88,11 @@ const router = createBrowserRouter([{
         {
             path:"/words",
             element: <Words/>
+        },
+
+        {
+            path:"/admin",
+            element: <Admin/>
         },
 
 
