@@ -16,6 +16,7 @@ import './fonts.css'
 import Practice from "./Practice.jsx";
 import Difficult from "./Difficult-words.jsx";
 import Words from "./Words.jsx";
+import Flashcards from "./Flashcards.jsx";
 
 
 
@@ -54,6 +55,11 @@ const router = createBrowserRouter([{
 
         {
             path:"/flashcards",
+            element: <Flashcards/>
+        },
+
+        {
+            path:"/flashcards-quiz",
             element: <Flashcards_quiz/>
         },
 
