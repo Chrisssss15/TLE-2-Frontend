@@ -62,9 +62,6 @@ function Flashcards_quiz(){
     }
     return(
         <>
-
-
-            <p>Hier komt de contact informatie</p>
             {started === false ? (
                 <div id="canvas" className="flex flex-col items-center justify-center h-screen">
                     <button
@@ -76,27 +73,52 @@ function Flashcards_quiz(){
             ) : (
 
 
+                <div className="flex items-center justify-center h-screen w-full bg-gray-100">
+                    {/* Fout-knop (links) */}
+                    <button onClick={nextCard} className="w-20 h-20 p-5 bg-red-600 text-white text-3xl font-bold rounded-full shadow-md hover:bg-red-700 transition">
+                        ✗
+                    </button>
 
+                    {/* Flashcard-container met flip effect */}
+                    <div className="relative w-[800px] h-[500px] mx-6 perspective">
+                        <div
+                            className={`w-full h-full relative transition-transform duration-500 transform-style preserve-3d ${
+                                flipped ? 'rotate-y-180' : ''
+                            }`}
+                        >
+                            {/* Voorkant - toont de vraag */}
+                            <div className="absolute w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center text-center text-xl font-semibold backface-hidden">
+                                <h2 className="font-bold text-3xl mb-16">{[signs[currentQuestionIndex].definition]}</h2>
+                            </div>
 
-                <div className="flex items-center justify-center h-screen w-full text-center">
+                            {/* Achterkant - toont de video */}
+                            <div className="absolute w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center backface-hidden rotate-y-180">
+                                {/*<video controls className="w-full h-full rounded-lg">*/}
+                                {/*    <source src={questions[currentQuestionIndex].video} type="video/mp4" />*/}
+                                {/*    Je browser ondersteunt deze video niet.*/}
+                                {/*</video>*/}
 
+                                <h2 className="font-bold text-3xl mb-16">{[signs[currentQuestionIndex].theme]}</h2>
 
-                    <button onClick={nextCard} className="w-12 h-12 bg-red-600">Fout</button>
-                    <div className="flex flex-col items-center justify-center h-screen w-80 text-center">
-                        {flipped === false ? (
+                            </div>
+                        </div>
 
-
-                            <h2 className="font-bold text-3xl mb-16">{[signs[currentQuestionIndex].definition]}</h2>
-                        ) : (
-                            <h2 className="font-bold text-3xl mb-16">{[signs[currentQuestionIndex].theme]}</h2>
-                        )}
+                        {/* "Draai Kaartje"-knop */}
                         <button
                             onClick={() => setFlipped(!flipped)}
-                            className="bg-blue-700 text-white"
-                        >Draai Kaartje</button>
+                            className="mt-4 bg-blue3 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue8 transition w-full"
+                        >
+                            Bekijk Antwoord
+                        </button>
                     </div>
-                    <button onClick={nextCard} className="w-12 h-12 bg-green-500">Goed</button>
+
+                    {/* Goed-knop (rechts) */}
+                    <button onClick={nextCard} className="w-20 h-20 bg-green-500 text-3xl text-white font-bold rounded-full shadow-md hover:bg-green-600 transition">
+                        ✓
+                    </button>
                 </div>
+
+
 
 
 
