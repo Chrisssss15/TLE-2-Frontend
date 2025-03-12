@@ -21,7 +21,7 @@ function Alfabet(){
                 console.log('API Response:', data);  // Debugging log
 
                 if (Array.isArray(data)) {
-                    setSigns(data); // ✅ Directly use data since it's an array
+                    setSigns(data); //Directly use data since it's an array
                 } else {
                     console.error('Unexpected API response structure:', data);
                     setSigns([]); // Prevent errors
