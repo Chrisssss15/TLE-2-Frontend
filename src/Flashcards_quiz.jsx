@@ -72,12 +72,12 @@ function Flashcards_quiz(){
 
             <div className="flex items-center justify-center h-screen w-full bg-gray-100">
                 {/* Fout-knop (links) */}
-                <button onClick={nextCard} className="w-14 h-14 bg-red-600 text-white font-bold rounded-full shadow-md hover:bg-red-700 transition">
+                <button onClick={nextCard} className="w-20 h-20 p-5 bg-red-600 text-white text-3xl font-bold rounded-full shadow-md hover:bg-red-700 transition">
                     ✗
                 </button>
 
                 {/* Flashcard-container met flip effect */}
-                <div className="relative w-80 h-52 mx-6 perspective">
+                <div className="relative w-[800px] h-[500px] mx-6 perspective">
                     <div
                         className={`w-full h-full relative transition-transform duration-500 transform-style preserve-3d ${
                             flipped ? 'rotate-y-180' : ''
@@ -107,7 +107,7 @@ function Flashcards_quiz(){
                 </div>
 
                 {/* Goed-knop (rechts) */}
-                <button onClick={nextCard} className="w-14 h-14 bg-green-500 text-white font-bold rounded-full shadow-md hover:bg-green-600 transition">
+                <button onClick={nextCard} className="w-20 h-20 bg-green-500 text-3xl text-white font-bold rounded-full shadow-md hover:bg-green-600 transition">
                     ✓
                 </button>
             </div>
