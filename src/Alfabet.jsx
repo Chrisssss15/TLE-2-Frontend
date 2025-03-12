@@ -9,23 +9,34 @@ function Alfabet(){
     useEffect(() => {
         async function fetchSigns() {
             try {
-                const response = await fetch('http://145.24.223.169:8008/v1/signs/', {
+                const response = await fetch('http://145.24.223.196:8008/v1/signs/', {
                     method: 'GET',
                     headers: {
-                        Accept: 'application/json',
+                        'Accept': 'application/json',
+                        'x-api-key': '95937790-3a9d-4ee2-9ed6-ace5165167f2',
                     },
                 });
 
                 const data = await response.json();
-                console.log(data);
-                setSigns(data.items);
+                console.log('API Response:', data);  // Debugging log
+
+                if (Array.isArray(data)) {
+                    setSigns(data); // ✅ Directly use data since it's an array
+                } else {
+                    console.error('Unexpected API response structure:', data);
+                    setSigns([]); // Prevent errors
+                }
             } catch (error) {
                 console.error('Error fetching signs:', error);
+                setSigns([]); // Ensure signs is an array even if the fetch fails
             }
         }
 
         fetchSigns();
     }, []);
+
+
+
 
 
     const alphabetSigns = signs.filter(sign => sign.theme === "Alfabet");
