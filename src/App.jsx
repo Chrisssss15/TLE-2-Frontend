@@ -43,8 +43,9 @@ const router = createBrowserRouter([{
             path:"/contact",
             element: <Contact/>
         },
+
         {
-            path:"/grammar",
+            path:"/grammar-quiz",
             element: <Grammar_quiz/>
         },
 
@@ -64,7 +65,7 @@ const router = createBrowserRouter([{
         },
 
         {
-            path:"/grammatica",
+            path:"/grammar",
             element: <Grammatica/>
         },
 
