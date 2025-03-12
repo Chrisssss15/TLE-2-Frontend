@@ -49,7 +49,7 @@ function Homepage() {
             </div>
 
             <div className="flex flex-col justify-center gap-[5vw] px-[10vw] b-[10vh] mb-[10vh] md:flex-row">
-                <Link to="/grammatica">
+                <Link to="/grammar">
 
                     <div
                         className="bg-orangeHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 hover:-translate-y-1 transition-transform">
