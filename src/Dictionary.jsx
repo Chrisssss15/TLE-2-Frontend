@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 
 function Dictionary() {
@@ -10,22 +11,31 @@ function Dictionary() {
             </div>
 
             <div className="flex justify-left gap-[3vw] my-10">
+                <Link to="/words">
                 <div className="w-[15vw] h-[15vw] bg-green1 flex items-center justify-center text-[15rem] rounded-3xl text-greenLetter shadow-lg
         transition-transform duration-800 ease-in-out font-Slickybohem hover:-translate-y-2 hover:shadow-2xl">
                     1
                 </div>
+            </Link>
+                <Link to="/words">
                 <div className="w-[15vw] h-[15vw] bg-green2 flex items-center justify-center text-[15rem] rounded-3xl text-greenLetter shadow-lg
         transition-transform duration-800 ease-in-out font-Slickybohem hover:-translate-y-2 hover:shadow-2xl">
                     2
                 </div>
+            </Link>
+                <Link to="/words">
                 <div className="w-[15vw] h-[15vw] bg-green3 flex items-center justify-center text-[15rem] rounded-3xl text-greenLetter shadow-lg
         transition-transform duration-800 ease-in-out font-Slickybohem hover:-translate-y-2 hover:shadow-2xl">
                     3
                 </div>
+                </Link>
+                <Link to="/words">
+
                 <div className="w-[15vw] h-[15vw] bg-green4 flex items-center justify-center text-[15rem] rounded-3xl text-greenLetter shadow-lg
         transition-transform duration-800 ease-in-out font-Slickybohem hover:-translate-y-2 hover:shadow-2xl">
                     4
                 </div>
+            </Link>
             </div>
 
 

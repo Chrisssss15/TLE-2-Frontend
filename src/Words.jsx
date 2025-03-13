@@ -76,11 +76,12 @@ function Woordenboek() {
     const handleFilter = () => {
         const filtered = signs.filter((sign) => (
             (filter.theme ? sign.theme.toLowerCase().includes(filter.theme.toLowerCase()) : true) &&
-            (filter.lesson ? sign.lesson === filter.lesson : true) &&  // Added lesson filtering
+            (filter.lesson ? sign.lesson === Number(filter.lesson) : true) &&  // Convert to number
             (filter.searchQuery ? sign.definition.toLowerCase().includes(filter.searchQuery.toLowerCase()) : true)
         ));
-        setFilteredSigns(filtered);  // Werk bij met de gefilterde data
+        setFilteredSigns(filtered);
     };
+
 
     // Handle change in filter values
     const handleChange = (e) => {
