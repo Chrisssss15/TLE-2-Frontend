@@ -29,7 +29,7 @@ function Flashcards_quiz(){
                 });
 
                 const questions = await response.json();
-                console.log(questions);
+                console.log(questions, 'gang');
                 // console.log(questions[0].id);
 
 

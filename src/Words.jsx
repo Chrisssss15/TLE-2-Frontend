@@ -3,72 +3,145 @@ import { useState, useEffect } from 'react';
 function Woordenboek() {
     const [signs, setSigns] = useState([]);
     const [filteredSigns, setFilteredSigns] = useState([]);
-    const [loading, setLoading] = useState(true);  // Loading state voor de gebruiker
-    const [error, setError] = useState(null);  // Error state voor eventuele problemen
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [filter, setFilter] = useState({
+        theme: '',
+        lesson: '',  // Added lesson filter
+        searchQuery: ''
+    });
+    const [themes, setThemes] = useState([]);
+    const [lessons, setLessons] = useState([]);  // New state for unique lessons
 
     // Haal gebaren op van de server
     useEffect(() => {
-        async function fetchSigns() {
+        async function fetchData() {
             try {
-                // De fetch-logica is nu uitgecommentarieerd.
-                /*
-                const response = await fetch('http://145.24.223.196:8008/signs', {
+                const response = await fetch('http://145.24.223.196:8008/v1/signs/', {
                     method: 'GET',
                     headers: {
-                        'Authorization': '',  // Voeg hier je API-sleutel toe
-                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'x-api-key': '95937790-3a9d-4ee2-9ed6-ace5165167f2',
                     },
                 });
 
                 const data = await response.json();
-                setSigns(data);  // Update de signs state met de opgehaalde data
-                setFilteredSigns(data);  // Standaard ook alle gebaren gefilterd weergeven
-                setLoading(false);  // Zet de loading state op false nadat de data geladen is
-                */
+                console.log("API Response:", data);
 
-                // Hardcoded gebaren voor nu
-                const hardcodedSigns = [
-                    { id: 1, definition: "Hallo", lesson: 1, theme: "Begroetingen", video_path: "/videos/hallo.mp4" },
-                    { id: 2, definition: "Dankjewel", lesson: 1, theme: "Beleefdheid", video_path: "/videos/dankjewel.mp4" },
-                    { id: 3, definition: "Sorry", lesson: 2, theme: "Beleefdheid", video_path: "/videos/sorry.mp4" },
-                    { id: 4, definition: "Ja", lesson: 2, theme: "Basisantwoorden", video_path: "/videos/ja.mp4" },
-                    { id: 5, definition: "Nee", lesson: 2, theme: "Basisantwoorden", video_path: "/videos/nee.mp4" },
-                    { id: 6, definition: "A", lesson: 3, theme: "Alfabet", video_path: "/videos/A.mp4" },
-                    { id: 7, definition: "B", lesson: 3, theme: "Alfabet", video_path: "/videos/B.mp4" },
-                    { id: 8, definition: "C", lesson: 3, theme: "Alfabet", video_path: "/videos/C.mp4" },
-                    { id: 9, definition: "D", lesson: 3, theme: "Alfabet", video_path: "/videos/D.mp4" },
-                    { id: 10, definition: "E", lesson: 3, theme: "Alfabet", video_path: "/videos/E.mp4" },
-                ];
+                if (Array.isArray(data)) {
+                    // Haal het video_path op per gebaar
+                    const updatedSigns = await Promise.all(
+                        data.map(async (sign) => {
+                            const videoResponse = await fetch(`http://145.24.223.196:8008/v1/signs/${sign.id}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'x-api-key': '95937790-3a9d-4ee2-9ed6-ace5165167f2',
+                                },
+                            });
 
-                setSigns(hardcodedSigns);  // Zet de hardcoded gebaren in de state
-                setFilteredSigns(hardcodedSigns);  // Zet de hardcoded gebaren ook als gefilterde lijst
-                setLoading(false);  // Zet loading op false zodra de data is ingesteld
+                            const videoData = await videoResponse.json();
+                            console.log(videoData.video_path)
+                            return { ...sign, video_path: videoData.video_path };
+                        })
+                    );
+
+                    setSigns(updatedSigns);  // Zet de bijgewerkte lijst in de state
+                    setFilteredSigns(updatedSigns);  // Filter de lijst op basis van de bijgewerkte data
+
+                    // Haal unieke thema's uit de gebaren en zet ze in de thema state
+                    const uniqueThemes = [...new Set(updatedSigns.map(sign => sign.theme))];
+                    setThemes(uniqueThemes);
+
+                    // Haal unieke lessen uit de gebaren en zet ze in de lessen state
+                    const uniqueLessons = [...new Set(updatedSigns.map(sign => sign.lesson))];
+                    setLessons(uniqueLessons);
+                } else {
+                    console.error("Unexpected API response structure:", data);
+                    setSigns([]);
+                    setFilteredSigns([]);
+                }
             } catch (error) {
-                setError(error);  // Sla de fout op bij een netwerk- of andere fout
+                console.error("Error fetching data:", error);
+                setError(error);
+            } finally {
                 setLoading(false);
             }
         }
 
-        fetchSigns();  // Haal de gebaren op
+        fetchData();
     }, []);
 
-    // Filter de gebaren op basis van thema of lesnummer
-    // const handleFilter = (filter) => {
-    //     const filtered = signs.filter((sign) => {
-    //         return (
-    //             (filter.theme ? sign.theme.toLowerCase().includes(filter.theme.toLowerCase()) : true) &&
-    //             (filter.lesson ? sign.lesson === filter.lesson : true)
-    //         );
-    //     });
-    //     setFilteredSigns(filtered);  // Update de filteredSigns state met de gefilterde data
-    // };
+    // Filter de gebaren op basis van thema, lesnummer of zoekopdracht
+    const handleFilter = () => {
+        const filtered = signs.filter((sign) => (
+            (filter.theme ? sign.theme.toLowerCase().includes(filter.theme.toLowerCase()) : true) &&
+            (filter.lesson ? sign.lesson === Number(filter.lesson) : true) &&  // Convert to number
+            (filter.searchQuery ? sign.definition.toLowerCase().includes(filter.searchQuery.toLowerCase()) : true)
+        ));
+        setFilteredSigns(filtered);
+    };
+
+
+    // Handle change in filter values
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFilter(prevFilter => ({
+            ...prevFilter,
+            [name]: value
+        }));
+    };
 
     return (
         <div className="p-6">
             <h1 className="text-3xl font-bold text-center mb-6">Gebaren Woordenboek</h1>
 
-            {/* Filter component (je zou dit later kunnen maken voor filters) */}
-            {/* <PlayerFilter onFilter={handleFilter} /> */}
+            {/* Filter component */}
+            <div className="mb-4 flex items-center space-x-4">
+                {/* Theme Dropdown */}
+                <select
+                    name="theme"
+                    value={filter.theme}
+                    onChange={handleChange}
+                    className="border p-2 rounded"
+                >
+                    <option value="">Selecteer Thema</option>
+                    {themes.map((theme, index) => (
+                        <option key={index} value={theme}>{theme}</option>
+                    ))}
+                </select>
+
+                {/* Lesson Dropdown */}
+                <select
+                    name="lesson"
+                    value={filter.lesson}
+                    onChange={handleChange}
+                    className="border p-2 rounded"
+                >
+                    <option value="">Selecteer Les</option>
+                    {lessons.map((lesson, index) => (
+                        <option key={index} value={lesson}>{`Les ${lesson}`}</option>
+                    ))}
+                </select>
+
+                {/* Search Bar */}
+                <input
+                    type="text"
+                    name="searchQuery"
+                    value={filter.searchQuery}
+                    onChange={handleChange}
+                    placeholder="Zoek op definitie"
+                    className="border p-2 rounded"
+                />
+
+                {/* Filter Button */}
+                <button
+                    onClick={handleFilter}
+                    className="bg-blue-500 text-white p-2 rounded"
+                >
+                    Filter
+                </button>
+            </div>
 
             {/* Weergeven van gebaren in een grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
