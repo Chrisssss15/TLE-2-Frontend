@@ -405,40 +405,59 @@ const SpellingQuiz = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
     return (
-        <div style={{ textAlign: "center", position: "relative" }}>
-            <h2>Sign Recognition</h2>
-            <Webcam ref={webcamRef} style={{ width: 640, height: 480 }} />
-            <canvas ref={canvasRef} style={{ position: "absolute" }} />
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center p-4">
+                {/* Titel */}
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Gebarenherkenning</h2>
 
-            <h3>Spell: {currentQuestion.title}</h3>
-            <div style={{ margin: "20px", fontSize: "2rem" }}>
-                {letterStatuses.map((item, index) => {
-                    // Colors: correct=green, active=blue, inactive=black.
-                    let color = "black";
-                    if (item.status === "correct") color = "green";
-                    else if (item.status === "active") color = "blue";
+                {/* Flex container voor Webcam/Canvas en Vraag+Letters */}
+                <div className="flex flex-row items-center gap-24">
+                    {/* Webcam en Canvas */}
+                    <div className="relative">
+                        <Webcam ref={webcamRef} className="w-[640px] h-[480px] rounded-lg shadow-lg" />
+                        <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
+                    </div>
 
-                    return (
-                        <span key={index} style={{ color, marginRight: "10px" }}>
-              {item.letter}
-            </span>
-                    );
-                })}
+                    {/* Vraag en Letters */}
+                    <div className="text-left self-center">
+                        <h3 className="text-3xl font-semibold text-gray-800">Spell: {currentQuestion.title}</h3>
+                        <div className="mt-4 text-4xl space-x-3">
+                            {letterStatuses.map((item, index) => {
+                                let colorClass = "text-black"; // Default kleur
+                                if (item.status === "correct") colorClass = "text-green-500";
+                                else if (item.status === "active") colorClass = "text-blue-500";
+
+                                return (
+                                    <span key={index} className={`${colorClass} font-bold`}>
+                                {item.letter}
+                            </span>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Volgende vraag-knop */}
+                {letterStatuses.every((item) => item.status === "correct") && (
+                    <>
+                        {currentQuestionIndex < questions.length - 1 ? (
+                            <button
+                                onClick={handleNextQuestion}
+                                className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition"
+                            >
+                                Next
+                            </button>
+                        ) : (
+                            <h3 className="mt-6 text-xl text-gray-700 font-semibold">All questions completed!</h3>
+                        )}
+                    </>
+                )}
+
+                {/*/!* Voorspelde letter *!/*/}
+                {/*<h3 className="mt-6 text-lg font-medium text-gray-800">*/}
+                {/*    Predicted Sign: <span className="font-bold text-blue-600">{prediction || "Waiting for input..."}</span>*/}
+                {/*</h3>*/}
             </div>
 
-            {/* Show the Next button only when the current question is completed */}
-            {letterStatuses.every((item) => item.status === "correct") && (
-                <>
-                    {currentQuestionIndex < questions.length - 1 ? (
-                        <button onClick={handleNextQuestion}>Next</button>
-                    ) : (
-                        <h3>All questions completed!</h3>
-                    )}
-                </>
-            )}
-
-            <h3>Predicted Sign: {prediction || "Waiting for input..."}</h3>
-        </div>
     );
 };
 
