@@ -93,12 +93,12 @@ function Flashcards_quiz(){
 
                             {/* Achterkant - toont de video */}
                             <div className="absolute w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center backface-hidden rotate-y-180">
-                                {/*<video controls className="w-full h-full rounded-lg">*/}
-                                {/*    <source src={questions[currentQuestionIndex].video} type="video/mp4" />*/}
-                                {/*    Je browser ondersteunt deze video niet.*/}
-                                {/*</video>*/}
+                                <video controls className="w-full h-full rounded-lg">
+                                    <source src={signs[currentQuestionIndex].video_path} type="video/mp4" />
+                                    Je browser ondersteunt deze video niet.
+                                </video>
 
-                                <h2 className="font-bold text-3xl mb-16">{[signs[currentQuestionIndex].theme]}</h2>
+                                {/*<h2 className="font-bold text-3xl mb-16">{[signs[currentQuestionIndex].video_path]}</h2>*/}
 
                             </div>
                         </div>
