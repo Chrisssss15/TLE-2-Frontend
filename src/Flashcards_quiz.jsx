@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { useAuth } from "./AuthContext.jsx";
 
 
 
@@ -11,7 +11,7 @@ function Flashcards_quiz(){
     const [userAnswer, setUserAnswer] = useState("");
     const [started, setStarted] = useState(false);
     const [flipped, setFlipped] = useState(false);
-
+    const { jwt } = useAuth();
 
 
 
@@ -25,6 +25,7 @@ function Flashcards_quiz(){
                     headers: {
                         'Accept': 'application/json',
                         'x-api-key': '95937790-3a9d-4ee2-9ed6-ace5165167f2',
+                        'Authorization' : 'Bearer ' + jwt,
                     },
                 });
 
