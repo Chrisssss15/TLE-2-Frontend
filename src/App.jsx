@@ -19,6 +19,7 @@ import Words from "./Words.jsx";
 import Flashcards from "./Flashcards.jsx";
 import SpellingQuiz from "./Spelling_quiz.jsx";
 import Admin from "./Admin.jsx";
+import DifficultWords from "./Difficult-words-view.jsx";
 
 
 
@@ -98,6 +99,11 @@ const router = createBrowserRouter([{
         {
             path:"/admin",
             element: <Admin/>
+        },
+
+        {
+            path:"/difficult-words-view",
+            element: <DifficultWords/>
         },
 
 
