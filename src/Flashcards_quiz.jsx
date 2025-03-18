@@ -16,7 +16,7 @@ function Flashcards_quiz(){
 
 
     const [signs, setSigns] = useState([]);
-
+    console.log(jwt)
     useEffect(() => {
         async function fetchSigns() {
             try {
@@ -50,15 +50,16 @@ function Flashcards_quiz(){
 
 
         console.log(currentQuestionIndex);
-        console.log([questions[currentQuestionIndex].definition]);
+
 
 
     }
 
 
 
-    function nextCard(){
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+    function nextCard() {
+        setCurrentQuestionIndex((prevIndex) => (prevIndex + 1) % signs.length);
+        console.log(currentQuestionIndex);
         setFlipped(false);
     }
     return(
@@ -94,8 +95,8 @@ function Flashcards_quiz(){
 
                             {/* Achterkant - toont de video */}
                             <div className="absolute w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center backface-hidden rotate-y-180">
-                                <video controls className="w-full h-full rounded-lg">
-                                    <source src={signs[currentQuestionIndex].video_path} type="video/mp4" />
+                                <video key={currentQuestionIndex} controls className="w-full h-full rounded-lg">
+                                    <source src={signs[currentQuestionIndex]?.video_path} type="video/mp4" />
                                     Je browser ondersteunt deze video niet.
                                 </video>
 
