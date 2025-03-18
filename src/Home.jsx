@@ -19,6 +19,15 @@ function Homepage() {
                 />
             </header>
 
+            <div id="loginbutton" className="flex justify-center mb-4">
+                <a
+                    href="https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://localhost:5173/loading"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out"
+                >
+                    Login
+                </a>
+            </div>
+
 
             <div className="flex flex-col justify-center gap-[5vw] px-[10vw] b-[10vh] mb-[10vh] md:flex-row">
                 <Link to="/spelling">
