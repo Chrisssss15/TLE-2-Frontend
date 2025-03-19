@@ -73,7 +73,7 @@ const SpellingQuiz = () => {
         },
         {
             theme: "KENNISMAKEN",
-            words: ["HOZENJQXTU","VOORNAAM", "NAAM"],
+            words: ["ACHTERNAAM", "VOORNAAM", "NAAM", "VOORSTELLEN", "WELKOM"],
         },
         {
             theme: "BEGROETINGEN",
