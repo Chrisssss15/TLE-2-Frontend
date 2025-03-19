@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 const questions = [
-    { question: "Ik ga nu uiteten met mijn familie",
-        answer: "NUIKUITETENMETFAMILIE" },
-    { question: "Morgen ga ik naar school",
-        answer: "MORGENIKGASCHOOL" },
-    { question: "Mijn huis is groot en mooi",
-        answer: "MIJNHUISGROOTMOOI" },
-    { question: "Wij gaan samen naar de winkel",
-        answer: "WIJSAMENGAANWINKEL" },
-    { question: "Ik hou van muziek luisteren",
-        answer: "IKHOUDENMUZIEKLUISTEREN" }
+    { question: "De huiswerkoefeningbegint, het is de bedoeling dat jullie goed oefenen.",
+        answer: "HUISWERKOOEFENINGBEGINT, HETISDEBEDOELINGDATJULLIEGOEDOEFENEN" },
+    { question: "Wil je alsjeblieft de koffie of thee pakken?",
+        answer: "WILJEALSJEBRIEFTDEKOFFIEOFTHEEPAKKEN" },
+    { question: "De les begin ik met koffie drinken, thuis drink ik thee",
+        answer: "DELESBEGINIKMETKOFFIEDRINKEN, THUISDRINKIKTHEE" },
+    { question: "Ik ben optijd aanwezig voor de les en zet de tafels en stoelen goed in het lokaal.",
+        answer: "IKBENOPTIJDANWEZIGVOORDELESENZETDETAFELSENSTOELENGOEDINHETLOKAAL" },
+    { question: "Wat is jouw naam?",
+        answer: "WATISJOUWNAAM" }
 ];
 
 function Grammar_quiz() {
@@ -24,6 +24,8 @@ function Grammar_quiz() {
     }
 
     function checkAnswer() {
+        if (currentQuestionIndex >= questions.length) return;
+
         let correctAnswer = questions[currentQuestionIndex].answer;
         let spacelessAnswer = userAnswer.replace(/\s+/g, '');
 
@@ -69,25 +71,34 @@ function Grammar_quiz() {
 
                     {/* Midden-content */}
                     <div className="flex flex-col items-center justify-center h-full">
-                        <h2 className="font-bold text-3xl sm:text-3xl text-gray-900 mb-12">
-                            {questions[currentQuestionIndex].question}
-                        </h2>
+                        {/* Check if the quiz is finished */}
+                        {currentQuestionIndex < questions.length ? (
+                            <>
+                                <h2 className="font-bold text-3xl sm:text-3xl text-gray-900 mb-12">
+                                    {questions[currentQuestionIndex].question}
+                                </h2>
 
-                        <input
-                            value={userAnswer}
-                            onChange={(e) => setUserAnswer(e.target.value)}
-                            type="text"
-                            placeholder="Typ je antwoord hier..."
-                            className={`border-2 p-3 rounded-lg w-full sm:w-1/2 text-lg focus:outline-none transition duration-200 shadow-sm
-                                ${feedback === 'wrong' ? 'border-red-500' : 'border-gray-300 focus:border-orangeHome'}`}
-                        />
+                                <input
+                                    value={userAnswer}
+                                    onChange={(e) => setUserAnswer(e.target.value)}
+                                    type="text"
+                                    placeholder="Typ je antwoord hier..."
+                                    className={`border-2 p-3 rounded-lg w-full sm:w-1/2 text-lg focus:outline-none transition duration-200 shadow-sm
+                                        ${feedback === 'wrong' ? 'border-red-500' : 'border-gray-300 focus:border-orangeHome'}`}
+                                />
 
-                        <button
-                            onClick={checkAnswer}
-                            className="mt-6 bg-orange4  text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md"
-                        >
-                            Controleer antwoord
-                        </button>
+                                <button
+                                    onClick={checkAnswer}
+                                    className="mt-6 bg-orange4 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md"
+                                >
+                                    Controleer antwoord
+                                </button>
+                            </>
+                        ) : (
+                            <h2 className="font-bold text-3xl sm:text-3xl text-gray-900 mb-12">
+                                Quiz voltooid! Goed gedaan!
+                            </h2>
+                        )}
                     </div>
                 </div>
             )}
