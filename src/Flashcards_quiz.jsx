@@ -64,16 +64,27 @@ function Flashcards_quiz() {
 
     if (quizCompleted) {
         return (
-            <div className="flex flex-col items-center justify-center h-screen">
-                <h1 className="text-3xl font-bold">Quiz Result</h1>
-                <p className="text-xl mt-4">Correct Answers: {goodAnswers}</p>
-                <p className="text-xl mt-2">Incorrect Answers: {badAnswers}</p>
-                <button
-                    onClick={() => (window.location.href = '/flashcards')}
-                    className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700"
-                >
-                    Back to Flashcards
-                </button>
+            <div className="flex flex-col items-center justify-center h-screen w-full bg-gray-100">
+                <div className="w-[70vw] flex items-start pl-[1vw] text-blueLetter">
+                    <h1 className="font-Slickybohem text-[8.5vw] leading-none tracking-wide">FLASHCARDS</h1>
+                </div>
+
+                <div className="bg-blueHome border-2 rounded-t-2xl w-[70vw] border-black pl-4 pt-1 flex justify-between h-[7vw]">
+                    <div className="flex flex-col items-start justify-center h-[7vw]">
+                        <h1 className="text-4xl font-bold">Quiz Result</h1>
+                    </div>
+                </div>
+
+                <div className="w-[70vw] h-auto flex flex-col items-center justify-center bg-white border-2 rounded-b-2xl border-black p-6 mb-[3vw]">
+                    <p className="text-xl font-semibold mb-4">Correct Answers: {goodAnswers}</p>
+                    <p className="text-xl font-semibold mb-4">Incorrect Answers: {badAnswers}</p>
+                    <button
+                        onClick={() => (window.location.href = '/flashcards')}
+                        className="bg-blue8 text-white font-bold px-6 py-3 rounded-lg shadow-md hover:bg-blue6 transition duration-300"
+                    >
+                        Back to Flashcards
+                    </button>
+                </div>
             </div>
         );
     }
