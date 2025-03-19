@@ -24,6 +24,7 @@ import {AuthProvider} from "./AuthContext.jsx";
 
 
 import DifficultWords from "./Difficult-words-view.jsx";
+import Login from "./Login.jsx";
 
 
 
@@ -113,6 +114,11 @@ const router = createBrowserRouter([{
         {
             path:"/loading",
             element: <Loader/>
+        },
+
+        {
+            path:"/login",
+            element: <Login/>
         },
 
     ]

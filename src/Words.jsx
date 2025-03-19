@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from "./AuthContext.jsx";
 
-function Woordenboek() {
+function Words() {
     const [signs, setSigns] = useState([]);
     const [filteredSigns, setFilteredSigns] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filter, setFilter] = useState({
         theme: '',
-        lesson: '',  // Added lesson filter
+        lesson: '',
         searchQuery: ''
     });
     const [themes, setThemes] = useState([]);
-    const [lessons, setLessons] = useState([]);  // New state for unique lessons
+    const [lessons, setLessons] = useState([]);
+    const { jwt } = useAuth();
 
     // Haal gebaren op van de server
     useEffect(() => {
@@ -22,6 +24,7 @@ function Woordenboek() {
                     headers: {
                         'Accept': 'application/json',
                         'x-api-key': '95937790-3a9d-4ee2-9ed6-ace5165167f2',
+                        'Authorization': 'Bearer ' + jwt,
                     },
                 });
 
@@ -29,33 +32,12 @@ function Woordenboek() {
                 console.log("API Response:", data);
 
                 if (Array.isArray(data)) {
-                    // Haal het video_path op per gebaar
-                    const updatedSigns = await Promise.all(
-                        data.map(async (sign) => {
-                            const videoResponse = await fetch(`http://145.24.223.196:8008/v1/signs/${sign.id}`, {
-                                method: 'GET',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'x-api-key': '95937790-3a9d-4ee2-9ed6-ace5165167f2',
-                                },
-                            });
+                    setSigns(data);
+                    setFilteredSigns(data);
 
-                            const videoData = await videoResponse.json();
-                            console.log(videoData.video_path)
-                            return { ...sign, video_path: videoData.video_path };
-                        })
-                    );
-
-                    setSigns(updatedSigns);  // Zet de bijgewerkte lijst in de state
-                    setFilteredSigns(updatedSigns);  // Filter de lijst op basis van de bijgewerkte data
-
-                    // Haal unieke thema's uit de gebaren en zet ze in de thema state
-                    const uniqueThemes = [...new Set(updatedSigns.map(sign => sign.theme))];
-                    setThemes(uniqueThemes);
-
-                    // Haal unieke lessen uit de gebaren en zet ze in de lessen state
-                    const uniqueLessons = [...new Set(updatedSigns.map(sign => sign.lesson))];
-                    setLessons(uniqueLessons);
+                    // Unieke thema's en lessen ophalen
+                    setThemes([...new Set(data.map(sign => sign.theme))]);
+                    setLessons([...new Set(data.map(sign => sign.lesson))]);
                 } else {
                     console.error("Unexpected API response structure:", data);
                     setSigns([]);
@@ -70,18 +52,17 @@ function Woordenboek() {
         }
 
         fetchData();
-    }, []);
+    }, [jwt]); // Voorkomt onnodige re-renders
 
     // Filter de gebaren op basis van thema, lesnummer of zoekopdracht
     const handleFilter = () => {
-        const filtered = signs.filter((sign) => (
+        const filtered = signs.filter(sign =>
             (filter.theme ? sign.theme.toLowerCase().includes(filter.theme.toLowerCase()) : true) &&
-            (filter.lesson ? sign.lesson === Number(filter.lesson) : true) &&  // Convert to number
+            (filter.lesson ? sign.lesson === Number(filter.lesson) : true) &&
             (filter.searchQuery ? sign.definition.toLowerCase().includes(filter.searchQuery.toLowerCase()) : true)
-        ));
+        );
         setFilteredSigns(filtered);
     };
-
 
     // Handle change in filter values
     const handleChange = (e) => {
@@ -155,11 +136,11 @@ function Woordenboek() {
                             <h3 className="text-lg font-semibold mb-2">{sign.definition}</h3>
                             {sign.video_path && sign.video_path.match(/\.(mp4|webm|ogg)$/i) ? (
                                 <video width="200" controls className="mx-auto">
-                                    <source src={sign.video_path} type="video/mp4"/>
+                                    <source src={sign.video_path} type="video/mp4" />
                                     Je browser ondersteunt geen video-element.
                                 </video>
                             ) : (
-                                <img src={sign.video_path} alt={sign.definition} width="200" className="mx-auto"/>
+                                <img src={sign.video_path} alt={sign.definition} width="200" className="mx-auto" />
                             )}
                             <div className="mt-2">
                                 <h4 className="text-sm text-gray-500">{sign.theme}</h4>
@@ -175,4 +156,4 @@ function Woordenboek() {
     );
 }
 
-export default Woordenboek;
+export default Words;

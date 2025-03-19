@@ -1,27 +1,24 @@
-// src/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-// Create a context
 const AuthContext = createContext();
 
-// Create a provider component
 export const AuthProvider = ({ children }) => {
-    const [jwt, setJwt] = useState(null);
+    const [jwt, setJwt] = useState(localStorage.getItem('jwt'));
 
     useEffect(() => {
-        // Retrieve the JWT token from localStorage
-        const token = localStorage.getItem('jwt');
-        setJwt(token);
+        const handleStorageChange = () => {
+            setJwt(localStorage.getItem('jwt'));
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
     }, []);
 
     return (
-        <AuthContext.Provider value={{ jwt }}>
+        <AuthContext.Provider value={{ jwt, setJwt }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// Custom hook to use the AuthContext
-export const useAuth = () => {
-    return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

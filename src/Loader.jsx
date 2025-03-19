@@ -1,20 +1,18 @@
-import { useSearchParams } from "react-router";
-import {useEffect, useState} from "react";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "./AuthContext.jsx";
 
 function Loader() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [token, setToken] = useState();
-    const obscure = searchParams.get("token");
-    const obscure2 = searchParams.get("name");
+    const [searchParams] = useSearchParams();
+    const { setJwt } = useAuth();
 
-
-    const obscure3 = obscure2.match(/\((\d+)\)/);
-
-    console.log(obscure, 'this is the token');
-    console.log(obscure3[1], 'this is the student number');
+    const ssoToken = searchParams.get("token");
+    const nameParam = searchParams.get("name");
+    const studentNrMatch = nameParam?.match(/\((\d+)\)/);
+    const studentNr = studentNrMatch ? studentNrMatch[1] : null;
 
     useEffect(() => {
-        async function loaderFunction() {
+        async function authenticate() {
             try {
                 const response = await fetch('http://145.24.223.196:8008/v1/login', {
                     method: 'POST',
@@ -22,40 +20,35 @@ function Loader() {
                         'content-type': 'application/json',
                         'Accept': 'application/json',
                         'x-api-key': '186036f7-2399-428f-aaa9-833711a05520',
-                        'Authorization': 'Bearer',
                     },
                     body: JSON.stringify({
-                        "ssoToken": obscure,
-                        "code": obscure3[1],
-                    })
+                        ssoToken: ssoToken,
+                        code: studentNr,
+                    }),
                 });
 
                 const data = await response.json();
-                console.log(data, 'this is where the response would be');
-                console.log(data.jwt);
-                setToken(data.jwt);
+                console.log(data, "Login response");
 
                 if (data.success) {
                     localStorage.setItem('jwt', data.jwt);
+                    setJwt(data.jwt); // zet het ook in de context
+                    window.location.href = "/";
                 }
-
             } catch (error) {
-                console.error('Error fetching signs:', error);
+                console.error('Error during login:', error);
             }
         }
 
-        loaderFunction();
-    }, []);
-
-    console.log(token, 'this is the token that has been set already');
-
+        if (ssoToken && studentNr) {
+            authenticate();
+        }
+    }, [ssoToken, studentNr, setJwt]);
 
     return (
-        <>
-            <div>
-                <h1>Loading... <br /> Please hold on to your boter kees and eieren</h1>
-            </div>
-        </>
+        <div>
+            <h1>Loading... <br /> Houd je boter, kaas en eieren vast 🍳</h1>
+        </div>
     );
 }
 
