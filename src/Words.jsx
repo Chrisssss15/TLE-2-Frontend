@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from "./AuthContext.jsx";
 
 function Words() {
@@ -17,7 +17,7 @@ function Words() {
     const [selectedSign, setSelectedSign] = useState(null);
     const { jwt } = useAuth();
 
-    // Haal gebaren op van de server
+    // Fetch data
     useEffect(() => {
         async function fetchData() {
             try {
@@ -31,13 +31,9 @@ function Words() {
                 });
 
                 const data = await response.json();
-                console.log("API Response:", data);
-
                 if (Array.isArray(data)) {
                     setSigns(data);
                     setFilteredSigns(data);
-
-                    // Unieke thema's en lessen ophalen
                     setThemes([...new Set(data.map(sign => sign.theme))]);
                     setLessons([...new Set(data.map(sign => sign.lesson))]);
                 } else {
@@ -56,7 +52,7 @@ function Words() {
         fetchData();
     }, [jwt]);
 
-    // Filter de gebaren op basis van thema, lesnummer of zoekopdracht
+    // Filter signs based on theme, lesson, or search query
     useEffect(() => {
         const filtered = signs.filter(sign =>
             (filter.theme ? sign.theme.toLowerCase().includes(filter.theme.toLowerCase()) : true) &&
@@ -64,7 +60,7 @@ function Words() {
             (filter.searchQuery ? sign.definition.toLowerCase().includes(filter.searchQuery.toLowerCase()) : true)
         );
         setFilteredSigns(filtered);
-    }, [filter, signs]); // Herfilteren elke keer dat de filter of signs verandert
+    }, [filter, signs]);
 
     // Handle change in filter values
     const handleChange = (e) => {
@@ -88,17 +84,20 @@ function Words() {
     };
 
     return (
-        <div className="p-6">
-            <h1 className="text-3xl font-bold text-center mb-6">Gebaren Woordenboek</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-white text-center p-6">
+
+            {/* Header */}
+            <div className="w-[70vw] pl-[1vw] text-[#01711D] text-center mb-8">
+                <h1 className="font-Slickybohem text-[8.5vw] leading-none tracking-wide text-shadow-xl">Gebaren Woordenboek</h1>
+            </div>
 
             {/* Filter component */}
-            <div className="mb-4 flex items-center space-x-4">
-                {/* Theme Dropdown */}
+            <div className="mb-6 w-full flex flex-col md:flex-row justify-center items-center gap-4">
                 <select
                     name="theme"
                     value={filter.theme}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    className="border-2 border-green-500 p-3 rounded-lg text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 transition ease-in-out duration-200"
                 >
                     <option value="">Selecteer Thema</option>
                     {themes.map((theme, index) => (
@@ -106,12 +105,11 @@ function Words() {
                     ))}
                 </select>
 
-                {/* Lesson Dropdown */}
                 <select
                     name="lesson"
                     value={filter.lesson}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    className="border-2 border-green-500 p-3 rounded-lg text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 transition ease-in-out duration-200"
                 >
                     <option value="">Selecteer Les</option>
                     {lessons.map((lesson, index) => (
@@ -119,19 +117,18 @@ function Words() {
                     ))}
                 </select>
 
-                {/* Search Bar */}
                 <input
                     type="text"
                     name="searchQuery"
                     value={filter.searchQuery}
                     onChange={handleChange}
                     placeholder="Zoek op definitie"
-                    className="border p-2 rounded"
+                    className="border-2 border-green-500 p-3 rounded-lg text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 transition ease-in-out duration-200"
                 />
             </div>
 
-            {/* Weergeven van gebaren in een grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Display signs in a grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 {loading ? (
                     <p className="text-center text-gray-600">Gebaren laden...</p>
                 ) : error ? (
@@ -140,21 +137,21 @@ function Words() {
                     filteredSigns.map((sign) => (
                         <div
                             key={sign.id}
-                            className="bg-white p-4 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-500 cursor-pointer"
-                            onClick={() => openModal(sign)}  // Open the modal on click
+                            className="bg-greenHome flex-1 hover:-translate-y-1 p-6 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer"
+                            onClick={() => openModal(sign)}
                         >
-                            <h3 className="text-lg font-semibold mb-2">{sign.definition}</h3>
+                            <h3 className="bg-greenHome border-4 border-black shadow-xl rounded-[7.8rem] flex-1 text-xl font-semibold text-black mb-4">{sign.definition}</h3>
                             {sign.video_path && sign.video_path.match(/\.(mp4|webm|ogg)$/i) ? (
-                                <video width="200" controls className="mx-auto">
-                                    <source src={sign.video_path} type="video/mp4" />
+                                <video width="200" controls className="mx-auto rounded-lg shadow-lg">
+                                    <source src={sign.video_path} type="video/mp4"/>
                                     Je browser ondersteunt geen video-element.
                                 </video>
                             ) : (
-                                <img src={sign.video_path} alt={sign.definition} width="200" className="mx-auto" />
+                                <img src={sign.video_path} alt={sign.definition} width="200" className="mx-auto rounded-lg shadow-lg"/>
                             )}
-                            <div className="mt-2">
-                                <h4 className="text-sm text-gray-500">{sign.theme}</h4>
-                                <span className="text-sm text-gray-400">Les {sign.lesson}</span>
+                            <div className="mt-4">
+                                <h4 className="text-sm text-gray-600">Thema: {sign.theme}</h4>
+                                <span className="text-sm text-gray-500">Les: {sign.lesson}</span>
                             </div>
                         </div>
                     ))
@@ -167,19 +164,20 @@ function Words() {
             {showModal && selectedSign && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg max-w-4xl w-full">
-                        <h2 className="text-2xl font-bold mb-6 text-center">{selectedSign.definition}</h2>
+                        <h2 className="text-2xl font-bold text-green-700 mb-6 text-center">{selectedSign.definition}</h2>
                         {selectedSign.video_path && selectedSign.video_path.match(/\.(mp4|webm|ogg)$/i) ? (
                             <video width="100%" controls autoPlay className="rounded-lg">
-                                <source src={selectedSign.video_path} type="video/mp4" />
+                                <source src={selectedSign.video_path} type="video/mp4"/>
                                 Je browser ondersteunt geen video-element.
                             </video>
                         ) : (
-                            <img src={selectedSign.video_path} alt={selectedSign.definition} className="mx-auto rounded-lg" />
+                            <img src={selectedSign.video_path} alt={selectedSign.definition}
+                                 className="mx-auto rounded-lg shadow-lg"/>
                         )}
                         <div className="mt-6 text-center">
                             <button
                                 onClick={closeModal}
-                                className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-700"
+                                className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
                             >
                                 Sluiten
                             </button>
