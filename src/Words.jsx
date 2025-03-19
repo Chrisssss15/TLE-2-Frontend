@@ -13,6 +13,8 @@ function Words() {
     });
     const [themes, setThemes] = useState([]);
     const [lessons, setLessons] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedSign, setSelectedSign] = useState(null);
     const { jwt } = useAuth();
 
     // Haal gebaren op van de server
@@ -52,17 +54,17 @@ function Words() {
         }
 
         fetchData();
-    }, [jwt]); // Voorkomt onnodige re-renders
+    }, [jwt]);
 
     // Filter de gebaren op basis van thema, lesnummer of zoekopdracht
-    const handleFilter = () => {
+    useEffect(() => {
         const filtered = signs.filter(sign =>
             (filter.theme ? sign.theme.toLowerCase().includes(filter.theme.toLowerCase()) : true) &&
             (filter.lesson ? sign.lesson === Number(filter.lesson) : true) &&
             (filter.searchQuery ? sign.definition.toLowerCase().includes(filter.searchQuery.toLowerCase()) : true)
         );
         setFilteredSigns(filtered);
-    };
+    }, [filter, signs]); // Herfilteren elke keer dat de filter of signs verandert
 
     // Handle change in filter values
     const handleChange = (e) => {
@@ -71,6 +73,18 @@ function Words() {
             ...prevFilter,
             [name]: value
         }));
+    };
+
+    // Open modal for the selected sign
+    const openModal = (sign) => {
+        setSelectedSign(sign);
+        setShowModal(true);
+    };
+
+    // Close modal
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedSign(null);
     };
 
     return (
@@ -114,14 +128,6 @@ function Words() {
                     placeholder="Zoek op definitie"
                     className="border p-2 rounded"
                 />
-
-                {/* Filter Button */}
-                <button
-                    onClick={handleFilter}
-                    className="bg-blue-500 text-white p-2 rounded"
-                >
-                    Filter
-                </button>
             </div>
 
             {/* Weergeven van gebaren in een grid */}
@@ -132,7 +138,11 @@ function Words() {
                     <p className="text-center text-red-600">Er is een fout opgetreden bij het laden van de gebaren.</p>
                 ) : filteredSigns.length > 0 ? (
                     filteredSigns.map((sign) => (
-                        <div key={sign.id} className="bg-white p-4 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-500">
+                        <div
+                            key={sign.id}
+                            className="bg-white p-4 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-500 cursor-pointer"
+                            onClick={() => openModal(sign)}  // Open the modal on click
+                        >
                             <h3 className="text-lg font-semibold mb-2">{sign.definition}</h3>
                             {sign.video_path && sign.video_path.match(/\.(mp4|webm|ogg)$/i) ? (
                                 <video width="200" controls className="mx-auto">
@@ -152,6 +162,31 @@ function Words() {
                     <p className="text-center text-gray-600">Geen gebaren gevonden...</p>
                 )}
             </div>
+
+            {/* Modal for showing the selected sign */}
+            {showModal && selectedSign && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-6 rounded-lg max-w-4xl w-full">
+                        <h2 className="text-2xl font-bold mb-6 text-center">{selectedSign.definition}</h2>
+                        {selectedSign.video_path && selectedSign.video_path.match(/\.(mp4|webm|ogg)$/i) ? (
+                            <video width="100%" controls autoPlay className="rounded-lg">
+                                <source src={selectedSign.video_path} type="video/mp4" />
+                                Je browser ondersteunt geen video-element.
+                            </video>
+                        ) : (
+                            <img src={selectedSign.video_path} alt={selectedSign.definition} className="mx-auto rounded-lg" />
+                        )}
+                        <div className="mt-6 text-center">
+                            <button
+                                onClick={closeModal}
+                                className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-700"
+                            >
+                                Sluiten
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
