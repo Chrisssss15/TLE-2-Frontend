@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 function Difficult() {
     return (
         <div className="container mx-auto px-[10vw] mb-6">
@@ -21,8 +23,12 @@ function Difficult() {
                     Grammatica
                 </div>
             </div>
-            <h2 className="text-redLink underline font-Strawford text-2xl">Bekijk hier lastige woorden</h2>
 
+            <Link to="/difficult-words-view">
+            <div>
+            <h2 className="text-redLink underline font-Strawford text-2xl">Bekijk hier lastige woorden</h2>
+            </div>
+            </Link>
         </div>
     );
 }

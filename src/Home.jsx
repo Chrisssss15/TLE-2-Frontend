@@ -11,11 +11,23 @@ function Homepage() {
     return (
 
         <div className="m-0 w-[100vw] flex flex-col ">
-            <img
-                src={gebaren}
-                alt="gebaren"
-                className="h-auto border-b-[1px] border-black mb-[20vh] px-[2%]"
-            />
+            <header className="relative w-full h-[80vh] border-b-2 border-black mb-[5vh]">
+                <img
+                    src={gebaren}
+                    alt="gebaren"
+                    className="w-full absolute max-h-full object-center"
+                />
+            </header>
+
+            <div id="loginbutton" className="flex justify-center mb-4">
+                <a
+                    href="https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://localhost:5173/loading"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out"
+                >
+                    Login
+                </a>
+            </div>
+
 
             <div className="flex flex-col justify-center gap-[5vw] px-[10vw] b-[10vh] mb-[10vh] md:flex-row">
                 <Link to="/spelling">

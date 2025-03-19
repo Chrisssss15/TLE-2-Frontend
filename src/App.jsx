@@ -19,6 +19,11 @@ import Words from "./Words.jsx";
 import Flashcards from "./Flashcards.jsx";
 import SpellingQuiz from "./Spelling_quiz.jsx";
 import Admin from "./Admin.jsx";
+import Loader from "./Loader.jsx";
+import {AuthProvider} from "./AuthContext.jsx";
+
+
+import DifficultWords from "./Difficult-words-view.jsx";
 
 
 
@@ -100,11 +105,24 @@ const router = createBrowserRouter([{
             element: <Admin/>
         },
 
+        {
+            path:"/difficult-words-view",
+            element: <DifficultWords/>
+        },
+
+        {
+            path:"/loading",
+            element: <Loader/>
+        },
 
     ]
 
 }]);
 function App() {
-    return <RouterProvider router={router} />;
+    return (
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
+    );
 }
 export default App
