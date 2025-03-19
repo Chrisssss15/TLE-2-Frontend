@@ -744,6 +744,7 @@ import "@tensorflow/tfjs";
 import { useAIModel } from "./hooks/useAIModel";
 import kNear from "./utils/kNear.js";
 import { useNavigate } from "react-router-dom";
+import avatar from "./assets/images/yellow avatar sitting.png"
 
 const initialStatusesForWord = (word) => {
     return word.split("").map((letter, index) => ({
@@ -766,40 +767,14 @@ const SpellingQuiz = () => {
         },
         {
             theme: "TIJDENS DE LES",
-            words: [
-                "AANWEZIG",
-                "BEDOELING",
-                "BEGINNEN",
-                "BOEK",
-                "DOCENT",
-                "STUDENT",
-                "HUISWERK",
-                "KLAAR",
-                "KOFFIE",
-                "LES",
-                "LOKAAL",
-                "MAKKELIJK",
-                "MEENEMEN",
-                "MOEILIJK",
-                "NU",
-                "OEFENING",
-                "OOK",
-                "OPDRACHT",
-                "PAUZE",
-                "THEE",
-                "THUIS",
-                "UITLEGGEN",
-                "VOLGENDE",
-                "VOORBEELD",
-                "VOORBEREIDEN",
-                "VORIGE",
-                "WC",
-            ],
+            words: ["AANWEZIG","BEDOELING","BEGINNEN","BOEK","DOCENT", "STUDENT", "HUISWERK", "KLAAR", "KOFFIE", "LES", "LOKAAL",
+                "MAKKELIJK", "MEENEMEN", "MOEILIJK", "NU", "OEFENING", "OOK", "OPDRACHT", "PAUZE", "THEE", "THUIS",
+                "UITLEGGEN", "VOLGENDE", "VOORBEELD", "VOORBEREIDEN", "VORIGE", "WC",],
         },
         {
             theme: "KENNISMAKEN",
             words: ["VOORNAAM", "NAAM"],
-            // words: ["ACTERNAAM", "VOORNAAM", "NAAM", "VOORSTELLEN", "WELKOM"],
+            // words: ["ACHTERNAAM", "VOORNAAM", "NAAM", "VOORSTELLEN", "WELKOM"],
 
         },
 
@@ -915,7 +890,7 @@ const SpellingQuiz = () => {
                         <button
                             key={index}
                             onClick={() => handleThemeSelection(theme)}
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition"
+                            className="bg-yellow8 hover:yellow7 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition"
                         >
                             {theme.theme}
                         </button>
@@ -926,57 +901,75 @@ const SpellingQuiz = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center p-4">
-            <h2 className="text-3xl font-bold mb-6">Oefen Thema: {selectedTheme.theme}</h2>
-
-            <div className="flex flex-row items-center gap-24">
-                <div className="relative">
-                    <Webcam ref={webcamRef} className="w-[640px] h-[480px] rounded-lg shadow-lg" />
-                    <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center p-4">
+                <div className="w-[70vw] flex items-start pl-[1vw] text-yellowLetter">
+                    <h1 className="font-Slickybohem text-[8.5vw] leading-none tracking-wide">Spelling</h1>
                 </div>
 
-                <div className="text-left self-center">
-                    <h3 className="text-3xl font-semibold">Spell: {selectedTheme.words[currentWordIndex]}</h3>
-                    <div className="mt-4 text-4xl space-x-3">
-                        {letterStatuses.map((item, index) => {
-                            let colorClass = "text-black";
-                            if (item.status === "correct") colorClass = "text-green-500";
-                            else if (item.status === "active") colorClass = "text-blue-500";
-
-                            return (
-                                <span key={index} className={`${colorClass} font-bold`}>
-                  {item.letter}
-                </span>
-                            );
-                        })}
+                <div className="bg-yellowHome border-2 rounded-t-2xl w-[70vw] border-black p-4 flex justify-between">
+                    <div className="flex flex-col items-start justify-center h-[8vw]">
+                        <h1 className="text-4xl font-bold mb-4 ">
+                            Opdracht {currentWordIndex + 1} / {selectedTheme.words.length}
+                        </h1>
+                        <h2 className="text-3xl font-bold mb-6">Oefen Thema: {selectedTheme.theme}</h2>
                     </div>
+                    <img src={avatar} className="h-[17vw] w-auto mt-[-11.5vw]"/>
+
+                </div>
+
+                <div className="bg-white border-2 rounded-b-2xl w-[70vw] border-black">
+
+                    <div className="flex flex-row items-center gap-24">
+                        <div className="relative p-3">
+                            <Webcam ref={webcamRef} className="w-[640px] h-[480px] rounded-lg shadow-lg"/>
+                            <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full"/>
+                        </div>
+
+                        <div className="text-left self-center">
+                            <h3 className="text-3xl font-semibold">Spel: {selectedTheme.words[currentWordIndex]}</h3>
+                            <div className="mt-4 text-4xl space-x-3">
+                                {letterStatuses.map((item, index) => {
+                                    let colorClass = "text-black";
+                                    if (item.status === "correct") colorClass = "text-green-500";
+                                    else if (item.status === "active") colorClass = "text-blue-500";
+
+                                    return (
+                                        <span key={index} className={`${colorClass} font-bold`}>
+                                {item.letter}
+                            </span>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+
+                    {letterStatuses.every((item) => item.status === "correct") && (
+                        <>
+                            {currentWordIndex < selectedTheme.words.length - 1 ? (
+                                <button
+                                    onClick={handleNextWord}
+                                    className="mt-6 px-6 py-3 bg-yellow8 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition"
+                                >
+                                    Volgend Woord
+                                </button>
+                            ) : (
+                                <div className="mt-6">
+                                    <p className="text-xl font-semibold text-green-600">Gefeliciteerd! Je hebt alle
+                                        woorden voltooid!</p>
+                                    <button
+                                        onClick={() => handleBackToSpelling(null)}
+                                        className="mt-4 px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-600 transition"
+                                    >
+                                        Terug naar Spelling
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    )}
                 </div>
             </div>
-
-            {letterStatuses.every((item) => item.status === "correct") && (
-                <>
-                    {currentWordIndex < selectedTheme.words.length - 1 ? (
-                        <button
-                            onClick={handleNextWord}
-                            className="mt-6 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition"
-                        >
-                            Volgend Woord
-                        </button>
-                    ) : (
-                        <div className="mt-6">
-                            <p className="text-xl font-semibold text-green-600">Gefeliciteerd! Je hebt alle woorden voltooid!</p>
-                            <button
-                                onClick={() => handleBackToSpelling(null)}
-                                className="mt-4 px-6 py-3 bg-gray-500 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-600 transition"
-                            >
-                                Terug naar Spelling
-                            </button>
-                        </div>
-                    )}
-                </>
-            )}
-        </div>
     );
+
 };
 
 export default SpellingQuiz;
