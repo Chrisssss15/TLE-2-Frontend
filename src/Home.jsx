@@ -14,7 +14,7 @@ function Homepage() {
 
             <div id="loginbutton" className="flex justify-center my-2">
                 <a
-                    href="https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://localhost:5173/loading"
+                    href="https://cmgt.hr.nl/chat-login/handle/tle2-1?redirect=http://145.24.223.67/loading"
                     className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out"
                 >
                     Login
