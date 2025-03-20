@@ -78,11 +78,11 @@ const SpellingQuiz = () => {
         {
             theme: "BEGROETINGEN",
             words: [
+                "HALLO",
+                "PRIMA",
                 "GAAT HET GOED",
                 "GOED",
-                "HALLO",
                 "OKE",
-                "PRIMA",
                 "TOT ZIENS",
                 "GOEDEMORGEN",
                 "GOEDEMIDDAG",
